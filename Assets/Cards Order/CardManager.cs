@@ -2,17 +2,11 @@ using Unity.Collections;
 using UnityEngine;
 public class CardManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] playingCards;
-
-    [SerializeField] private GameObject[] myHand = new GameObject[5];
+    [SerializeField] public GameObject[] playingCards;
 
     private void Awake()
     {
-        playingCards = GameObject.FindGameObjectsWithTag("Cards");
-        foreach (var card in playingCards)
-        {
-            card.SetActive(false);
-        }
+        playingCards = Resources.LoadAll<GameObject>("NumberCards");
     }
 
     private void Start()
@@ -28,16 +22,9 @@ public class CardManager : MonoBehaviour
             playingCards[PositionInIndex] = playingCards[randomizeArray];
             playingCards[randomizeArray] = obj;
         }
-
-        DealCardToPlayer();
-    }
-    void DealCardToPlayer()
-    {// have each card 
-       
-        for (int i = 0; i < myHand.Length; i++)
-        {
-            playingCards[i].SetActive(true); 
-        }
+        
+        DealCards dealCards = GetComponent<DealCards>();
+        dealCards.DealCardToPlayer();
     }
 }
 
