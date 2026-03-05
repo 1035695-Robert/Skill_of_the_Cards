@@ -2,7 +2,7 @@ using Unity.Collections;
 using UnityEngine;
 public class CardManager : MonoBehaviour
 {
-    [SerializeField] public GameObject[] playingCards;
+  public GameObject[] playingCards;
 
     private void Awake()
     {
@@ -17,10 +17,10 @@ public class CardManager : MonoBehaviour
     {
         for (int PositionInIndex = 0; PositionInIndex < playingCards.Length; PositionInIndex++)
         {
-            GameObject obj = playingCards[PositionInIndex];
+            GameObject card = playingCards[PositionInIndex];
             int randomizeArray = Random.Range(0, PositionInIndex);
             playingCards[PositionInIndex] = playingCards[randomizeArray];
-            playingCards[randomizeArray] = obj;
+            playingCards[randomizeArray] = card;
         }
         
         DealCards dealCards = GetComponent<DealCards>();
