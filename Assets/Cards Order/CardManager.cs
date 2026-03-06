@@ -24,7 +24,7 @@ public class CardManager : MonoBehaviour
         }
         
         DealCards dealCards = GetComponent<DealCards>();
-        dealCards.DealCardToPlayer();
+        dealCards.StartDealHand(); 
     }
 }
 

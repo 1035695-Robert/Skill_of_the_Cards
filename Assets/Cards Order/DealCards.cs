@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
 using Unity.VisualScripting;
@@ -17,14 +18,14 @@ public class DealCards : MonoBehaviour
     [SerializeField] private SplineContainer splineContainer;
     [SerializeField] private Transform spawnPoint;
 
-    public void DealCardToPlayer()
+
+    public void StartDealHand()
     {
-        if(myHand.Count >= myHandSize)
-        return;
-            //GameObject g = Instantiate(card, spawnPoint.position, spawnPoint.rotation);
-            //myHand.Add(g);
-            //UpdateCardPosition();
-        
+       StartCoroutine (DealCardToPlayer());
+        Debug.Log("DealCards to player");
+    }
+    IEnumerator DealCardToPlayer()
+    {
        cardManager = GetComponent<CardManager>();
         for (int i = 0; i < myHandSize; i++)
         {
@@ -33,7 +34,10 @@ public class DealCards : MonoBehaviour
             myHand.Add(cardInHand);
             cardInHand.name = cardInHand.name.TrimEnd("(Clone)");
             UpdateCardPosition();
+            yield return new WaitForSeconds(0.5f);
         }
+         
+        
     }
     void UpdateCardPosition()
     {
