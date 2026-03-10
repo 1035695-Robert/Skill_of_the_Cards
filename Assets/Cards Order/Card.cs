@@ -3,10 +3,17 @@ using UnityEngine.Splines;
 
 public class Card : MonoBehaviour
 {
+    [Header("card Data")]
+    [SerializeField] private string cardName;
+    [SerializeField] private int cardNumber;
+
+
     private Collider2D cardCollider;
     private Vector3 startDragPosition;
-     [SerializeField] private bool isFull = false;
+    public bool isFull = false;
     string cardLock;
+
+    CardManager cardManager;
     private void Start()
     {
         cardCollider = GetComponent<Collider2D>();
@@ -37,7 +44,7 @@ public class Card : MonoBehaviour
             cardCollider.enabled = true;
             if (hitCollider != null && hitCollider.TryGetComponent(out ICardDropArea cardDropArea))
             {
-                cardDropArea.OnCardDrop(this);
+                cardDropArea.OnCardDrop(this, cardName, cardNumber);
                 isFull = true;
                 cardCollider = null;
                 Destroy(hitCollider);
@@ -56,4 +63,7 @@ public class Card : MonoBehaviour
         position.z = 0f;
         return position;
     }
+
+
+
 }
