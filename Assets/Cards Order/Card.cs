@@ -10,7 +10,7 @@ public class Card : MonoBehaviour
 
     private Collider2D cardCollider;
     private Vector3 startDragPosition;
-    public bool isFull = false;
+    //public bool isFull = false;
     string cardLock;
 
     CardManager cardManager;
@@ -33,7 +33,6 @@ public class Card : MonoBehaviour
             transform.position = GetMousePositionInWorldSpace();
         }
     }
-
     private void OnMouseUp()
     {
 
@@ -45,9 +44,9 @@ public class Card : MonoBehaviour
             if (hitCollider != null && hitCollider.TryGetComponent(out ICardDropArea cardDropArea))
             {
                 cardDropArea.OnCardDrop(this, cardName, cardNumber);
-                isFull = true;
+                //isFull = true;
                 cardCollider = null;
-                Destroy(hitCollider);
+               
             }
             else
             {
@@ -55,7 +54,6 @@ public class Card : MonoBehaviour
             }
         }
     }
-
 
     public Vector3 GetMousePositionInWorldSpace()
     {

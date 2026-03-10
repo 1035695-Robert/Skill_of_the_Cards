@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7463137335061602619}
   - component: {fileID: 6948807836975089412}
   - component: {fileID: 3416771710898097756}
-  - component: {fileID: -1562662752348495276}
   - component: {fileID: -5005469317634796741}
   m_Layer: 8
   m_Name: card 12
@@ -149,21 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb978a26bf022f544ae63d6e71f0df5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFull: 0
---- !u!114 &-1562662752348495276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3387339515958456516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30a346c155be5f84bbc01c1a2c6521a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   cardName: 
   cardNumber: 12
+  isFull: 0
 --- !u!50 &-5005469317634796741
 Rigidbody2D:
   serializedVersion: 5

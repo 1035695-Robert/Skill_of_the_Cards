@@ -42,5 +42,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3796085859
+    locked: 0
+  - name: Card DropZone
+    uniqueID: 4238844857
+    locked: 0
+  - name: cards
+    uniqueID: 2842757317
+    locked: 0
   m_RenderingLayers:
   - Default

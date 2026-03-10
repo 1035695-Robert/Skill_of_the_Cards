@@ -27,5 +27,6 @@ public class CardManager : MonoBehaviour
         dealCards.StartDealHand(); 
     }
 }
-
+#region notes
 //fisher-yates Algorithm
+#endregion
