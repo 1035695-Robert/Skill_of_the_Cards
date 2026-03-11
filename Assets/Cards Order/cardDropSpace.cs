@@ -15,8 +15,10 @@ public class cardDropSpace : MonoBehaviour, ICardDropArea
         {
             if (cardSlots[i].isFull == false)
             {
+               
                 card.transform.SetParent(cardSlots[i].transform);
                 card.transform.position = cardSlots[i].transform.position;
+                card.transform.rotation = cardSlots[i].transform.rotation;
                 cardSlots[i].isFull = true;
                 placementList.cardNumber.Add(number);
                 if (i == cardSlots.Length - 1)
