@@ -43,9 +43,9 @@ public class cardDropSpace : MonoBehaviour, ICardDropArea
                 Debug.Log("correct" + (i + 1) + "/" + (placementList.cardNumber.Count));
                 if (i + 1 == placementList.cardNumber.Count - 1)
                 {
-                   
+                    
                     Debug.Log("<color=yellow> winner </color>" + (i + 2) + "/" + placementList.cardNumber.Count);
-                     winLose.Win();
+                    winLose.Win();
                 }
 
                 yield return null;

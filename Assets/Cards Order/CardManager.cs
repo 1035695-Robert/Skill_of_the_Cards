@@ -5,13 +5,17 @@ public class CardManager : MonoBehaviour
   public GameObject[] playingCards;
 
     public InstructionUI ui;
+
     public GameObject DropZone;
+    public GameObject timeDisplay;
     public void GameStart()
     {
         ui = GameObject.Find("Instruction UI").GetComponent<InstructionUI>();
         ui.StartGame();
+       
 
        DropZone.SetActive(true);
+       timeDisplay.SetActive(true);
 
         Shuffle();
     }
