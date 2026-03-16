@@ -8,6 +8,7 @@ public class cardDropSpace : MonoBehaviour, ICardDropArea
     public CardPlacementList placementList = new CardPlacementList();
     public CardPlacementSlot[] cardSlots;
 
+    public WinLose winLose;
 
     public void OnCardDrop(Card card, string name, int number)
     {
@@ -42,13 +43,16 @@ public class cardDropSpace : MonoBehaviour, ICardDropArea
                 Debug.Log("correct" + (i + 1) + "/" + (placementList.cardNumber.Count));
                 if (i + 1 == placementList.cardNumber.Count - 1)
                 {
+                   
                     Debug.Log("<color=yellow> winner </color>" + (i + 2) + "/" + placementList.cardNumber.Count);
+                     winLose.Win();
                 }
 
                 yield return null;
             }
             else
             {
+                //lose condition
                 Debug.Log("<color=red> incorrect </color>");
                 yield break;
             }
