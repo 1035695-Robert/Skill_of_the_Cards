@@ -3,9 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoadManager : MonoBehaviour
 {
-    public void LoadScene(string LevelName)
+    public void LoadScene(string levelName)
     {
-      SceneManager.LoadScene(LevelName);
+        if (Application.CanStreamedLevelBeLoaded(levelName))
+        {
+            SceneManager.LoadScene(levelName);
+        }
+        else
+        {
+            Debug.Log("project Not Ready");
+        }
     }
 }
 
