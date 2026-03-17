@@ -4,17 +4,24 @@ public class CardManager : MonoBehaviour
 {
   public GameObject[] playingCards;
 
-    private void Awake()
-    {
-        playingCards = Resources.LoadAll<GameObject>("NumberCards");
-    }
+    public InstructionUI ui;
 
-    private void Start()
+    public GameObject DropZone;
+    public GameObject timeDisplay;
+    public void GameStart()
     {
+        ui = GameObject.Find("Instruction UI").GetComponent<InstructionUI>();
+        ui.StartGame();
+       
+
+       DropZone.SetActive(true);
+       timeDisplay.SetActive(true);
+
         Shuffle();
     }
-    private void Shuffle() // simple shuffle system by prefixWiz
+    public void Shuffle() // simple shuffle system by prefixWiz
     {
+        playingCards = Resources.LoadAll<GameObject>("NumberCards");
         for (int PositionInIndex = 0; PositionInIndex < playingCards.Length; PositionInIndex++)
         {
             GameObject card = playingCards[PositionInIndex];

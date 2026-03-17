@@ -17,7 +17,7 @@ TagManager:
   - Cards
   - CardDropHitBox
   - 
-  - 
+  - new UI
   - 
   - 
   - 
@@ -50,6 +50,9 @@ TagManager:
     locked: 0
   - name: cards
     uniqueID: 2842757317
+    locked: 0
+  - name: UI
+    uniqueID: 1553499165
     locked: 0
   m_RenderingLayers:
   - Default
