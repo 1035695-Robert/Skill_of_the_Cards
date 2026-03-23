@@ -21,28 +21,34 @@ public class DealCards : MonoBehaviour
 
     public void StartDealHand()
     {
-       StartCoroutine (DealCardToPlayer());
+        StartCoroutine(DealCardToPlayer());
         Debug.Log("DealCards to player");
     }
     IEnumerator DealCardToPlayer()
     {
-       cardManager = GetComponent<CardManager>();
-        for (int i = 0; i < myHandSize; i++)
+        cardManager = GetComponent<CardManager>();
+      
         {
-            
-            GameObject cardInHand = Instantiate(cardManager.playingCards[i], spawnPoint.position, spawnPoint.rotation);
-            myHand.Add(cardInHand);
-            cardInHand.name = cardInHand.name.TrimEnd("(Clone)");
-            UpdateCardPosition();
-            yield return new WaitForSeconds(0.5f);
+            for (int i = 0; i < myHandSize; i++)
+            {
+
+                GameObject cardInHand = Instantiate(cardManager.playingCards[i], spawnPoint.position, spawnPoint.rotation);
+                myHand.Add(cardInHand);
+                cardInHand.name = cardInHand.name.TrimEnd("(Clone)");
+                UpdateCardPosition();
+                yield return new WaitForSeconds(0.5f);
+            }
+            Timer timer = GameObject.Find("Timer").GetComponent<Timer>();
+            StartCoroutine(timer.StartTimer());
         }
-         
-        
+
     }
     void UpdateCardPosition()
     {
         if (myHand.Count == 0)
+        {
             return;
+        }
         float cardSpacing = 1f / myHandSize;
         float firstCardPosition = 0.5f - (myHand.Count - 1) * cardSpacing / 2;
         Spline spline = splineContainer.Spline;
@@ -57,5 +63,6 @@ public class DealCards : MonoBehaviour
             myHand[i].transform.DOMove(splinePosition, 0.25f);
             myHand[i].transform.DOLocalRotateQuaternion(rotation, 0.25f);
         }
+       
     }
 }

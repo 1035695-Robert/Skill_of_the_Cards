@@ -38,7 +38,7 @@ public class TimeScoreText : MonoBehaviour
     //    GetScoreFileContent();
     //}
 
-    void GetScoreFileContent()
+    public void GetScoreFileContent()
     {
         if (!string.IsNullOrEmpty(fileName))
         {
@@ -71,9 +71,10 @@ public class TimeScoreText : MonoBehaviour
             Debug.Log("new Best time");
             currentTimeData = new TimeScore(currentPlayTime.ToString());
             WriteData(currentTimeData.ReturnTimeSaveData());
+            bestTimeText.text = "New Record \n" + currentPlayTime + " Seconds";
         }
         else
-            bestTimeText.text = textFileContents;
+            bestTimeText.text = textFileContents + " Seconds";
     }
     void WriteData(string dataToWrite)
     {
@@ -83,6 +84,7 @@ public class TimeScoreText : MonoBehaviour
         {
             writer.WriteLine(dataToWrite);
         }
+        
     }
 }
 

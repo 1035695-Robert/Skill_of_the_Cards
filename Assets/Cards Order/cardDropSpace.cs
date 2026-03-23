@@ -54,6 +54,7 @@ public class cardDropSpace : MonoBehaviour, ICardDropArea
             {
                 //lose condition
                 Debug.Log("<color=red> incorrect </color>");
+                winLose.Lose();
                 yield break;
             }
         }

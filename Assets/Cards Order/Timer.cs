@@ -13,11 +13,7 @@ public class Timer : MonoBehaviour
     public string currentTime;
     public bool gameInPlay;
 
-    private void Awake()
-    {
-        StartCoroutine(StartTimer());
-    }
-
+   
     public IEnumerator StartTimer()
     {
         gameInPlay = true;
@@ -29,7 +25,7 @@ public class Timer : MonoBehaviour
 
            
             Second = Mathf.FloorToInt(countUp % 60);
-            currentTime = "Seconds: " + Second.ToString();
+            currentTime =  Second.ToString() + " Seconds";
             currentTimeText.text = currentTime;
             yield return null;
         }

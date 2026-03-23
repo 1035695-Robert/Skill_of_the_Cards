@@ -18,7 +18,7 @@ public class WinLose : MonoBehaviour
         WinConditionUI.SetActive(true);
         timer.gameInPlay = false;
 
-        finalTimeText.text = "time: " + timer.currentTime;
+        finalTimeText.text = "Time\n" + timer.currentTime;
         timeScore.BestTimeCheck(timer.Second);
         // set score
 
@@ -26,4 +26,13 @@ public class WinLose : MonoBehaviour
         // update scores
 
     }
+public void Lose()
+    {
+        LoseConditionUI.SetActive(true);
+        timer.gameInPlay = false;
+        
+        
+
+    }
 }
+
