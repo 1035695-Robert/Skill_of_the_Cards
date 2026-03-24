@@ -19,4 +19,11 @@ public class MainMenu : MonoBehaviour
         title.SetActive(!title.activeSelf);
        levelSelection.SetActive(!levelSelection.activeSelf);
     }
+
+    public void Quit()
+    {
+        Debug.LogError("Quit Game");
+       Application.Quit();
+    }
+   
 }
