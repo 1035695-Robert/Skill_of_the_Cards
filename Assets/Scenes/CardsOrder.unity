@@ -153,7 +153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &222210350
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2487,8 +2487,7 @@ PrefabInstance:
       value: "Objective \r\nThe objective of the game is to select the cards in sequential
         order.\r\nSelect all the cards order by clicking/dragging the cards On to
         the center Panel\n\r\nWin Condition\r\nIf all the cards are ordered in numerical
-        order (within time limit)\r\n\nFail Condition\r\nIf the player selects a
-        card that isn\u2019t next in the sequence.\r\n\n\n"
+        order\r\n\nFail Condition\r\nwhe the cards are not placed in numerical order.\n\n"
       objectReference: {fileID: 0}
     - target: {fileID: 1355795046232262499, guid: 9c3869136deeddc44b93c6885a777ee7, type: 3}
       propertyPath: m_AnchorMax.y
