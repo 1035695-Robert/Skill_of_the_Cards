@@ -2,8 +2,9 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - Cards
   layers:
   - Default
   - TransparentFX
@@ -12,11 +13,11 @@ TagManager:
   - Water
   - UI
   - 
+  - CardDropZone
+  - Cards
+  - CardDropHitBox
   - 
-  - 
-  - 
-  - 
-  - 
+  - new UI
   - 
   - 
   - 
@@ -41,3 +42,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3796085859
+    locked: 0
+  - name: Card DropZone
+    uniqueID: 4238844857
+    locked: 0
+  - name: cards
+    uniqueID: 2842757317
+    locked: 0
+  - name: UI
+    uniqueID: 1553499165
+    locked: 0
+  m_RenderingLayers:
+  - Default
