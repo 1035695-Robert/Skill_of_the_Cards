@@ -26,9 +26,9 @@ public class DealCardsMatch : MonoBehaviour
                 Debug.Log(card.name);
                 card.transform.SetParent(cardSlots[i].transform);
                 card.transform.position = cardSlots[i].transform.position;
-      
+            card.transform.Rotate(0, 180, 0);
         }
-        //start game
+     
     }
     
 }
