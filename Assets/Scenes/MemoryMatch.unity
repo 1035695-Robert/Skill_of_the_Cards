@@ -526,11 +526,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 476975665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b0dff32bf782e441a84ac6614e077d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e427980c13cc454687634edd0d72d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardSlots: []
-  cards: []
+  cardCount: 0
+  typeList: []
+  matchedCount: 0
 --- !u!1001 &544094944
 PrefabInstance:
   m_ObjectHideFlags: 0

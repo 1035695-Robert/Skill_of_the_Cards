@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 3338094003351063064}
   - component: {fileID: 3282398323527026872}
   - component: {fileID: 1609068542787373342}
-  - component: {fileID: 5119210438014683903}
+  - component: {fileID: 3297078493365100237}
   m_Layer: 0
   m_Name: CardMatch 9
   m_TagString: Untagged
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CardType: 2
---- !u!61 &5119210438014683903
+--- !u!61 &3297078493365100237
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
