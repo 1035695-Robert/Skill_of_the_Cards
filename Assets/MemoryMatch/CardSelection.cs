@@ -9,6 +9,7 @@ public class CardSelection : MonoBehaviour
 
     public int matchedCount;
     public int maxPairAmount = 9;
+    public int maxTurns = 3;
 
 
     private void OnEnable()
@@ -45,21 +46,30 @@ public class CardSelection : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         string[] typeListArray = typeList.ToArray();
-       
+
         if (typeListArray[0] == typeListArray[1])
         {
             Debug.Log("Match");
             matchedCount++;
             EventManager.SelectedCard.Invoke();
-            if( matchedCount == maxPairAmount)
+
+            EventManager.starCheck.Invoke(matchedCount);
+
+            if (matchedCount == maxPairAmount)
             {
+                EventManager.allCardsMatch.Invoke();
                 Debug.Log("Congrats");
             }
-         
+
         }
         else
         {
-            EventManager.failed.Invoke();
+            maxTurns--;
+
+            if (maxTurns != 0)
+            {
+                EventManager.failedMatch.Invoke(maxTurns);
+            }
         }
         EventManager.locked.Invoke();
         typeList.Clear();

@@ -1,13 +1,16 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 
 public class DealCardsMatch : MonoBehaviour
 {
 
     public CardPlacementSlot[] cardSlots;
-    public List<GameObject> cards;
+    
+
+    public float waitTime;
 
     public void OnEnable()
     {
@@ -26,10 +29,15 @@ public class DealCardsMatch : MonoBehaviour
                 Debug.Log(card.name);
                 card.transform.SetParent(cardSlots[i].transform);
                 card.transform.position = cardSlots[i].transform.position;
-            card.transform.Rotate(0, 180, 0);
+            //card.transform.Rotate(0, 180, 0);
         }
+        StartCoroutine(FlipDelay());
      
     }
-    
+    IEnumerator FlipDelay()
+    {
+        yield return new WaitForSeconds(waitTime);
+        EventManager.startGame.Invoke();
+    }
 }
 

@@ -31,7 +31,9 @@ public class CardMatch : MonoBehaviour
 
     public void OnEnable()
     {
-        EventManager.failed += ResetCards;
+        isSelected = true;
+        EventManager.startGame += ResetCards ;
+        EventManager.failedMatch += ResetCards;
         EventManager.locked += LockedCards;
     }
     private void OnMouseDown()
@@ -64,8 +66,11 @@ public class CardMatch : MonoBehaviour
 
         yield return null;
     }
-
     public void ResetCards()
+    {
+        StartCoroutine(ResetAllCards());
+    }
+    public void ResetCards(int maxTurns)
     {
         StartCoroutine(ResetAllCards());
     }
@@ -96,7 +101,7 @@ public class CardMatch : MonoBehaviour
 
     void MatchedCards()
     {
-        EventManager.failed -= ResetCards;
+        EventManager.failedMatch -= ResetCards;
         //card will no longer Flip since already paired
     }
 }
