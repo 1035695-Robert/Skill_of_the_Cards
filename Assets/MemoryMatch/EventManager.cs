@@ -11,6 +11,9 @@ public class EventManager
     public static WinCondition allCardsMatch;
 
     //memory Match
+    public delegate void StartingGame();
+    public static StartingGame startingGame;
+
     public delegate void CardCheck(string type);
     public static CardCheck CardSelected;
 

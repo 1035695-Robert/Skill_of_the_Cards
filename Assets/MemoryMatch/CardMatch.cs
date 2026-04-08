@@ -26,15 +26,22 @@ public class CardMatch : MonoBehaviour
     public float turnDuration = 2.0f;
     public bool isSelected;
     public bool isLocked;
-
+    public int turnsLeft = 3;
 
 
     public void OnEnable()
     {
         isSelected = true;
-        EventManager.startGame += ResetCards ;
+        EventManager.startGame += ResetCards;
         EventManager.failedMatch += ResetCards;
         EventManager.locked += LockedCards;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.startGame -= ResetCards;
+        EventManager.failedMatch -= ResetCards;
+        EventManager.locked -= LockedCards;
     }
     private void OnMouseDown()
     {
@@ -48,7 +55,7 @@ public class CardMatch : MonoBehaviour
     {
         float turnTime = 0;
         string cardTypeString = CardType.ToString();
-        Debug.Log("Card type" + cardTypeString);      
+        Debug.Log("Card type" + cardTypeString);
         EventManager.CardSelected.Invoke(cardTypeString);
         EventManager.SelectedCard += MatchedCards;
 
@@ -62,7 +69,7 @@ public class CardMatch : MonoBehaviour
             turnTime += Time.deltaTime;
             yield return null;
         }
-       
+
 
         yield return null;
     }
@@ -72,6 +79,7 @@ public class CardMatch : MonoBehaviour
     }
     public void ResetCards(int maxTurns)
     {
+        turnsLeft--;
         StartCoroutine(ResetAllCards());
     }
 
@@ -91,7 +99,10 @@ public class CardMatch : MonoBehaviour
         }
         EventManager.SelectedCard -= MatchedCards;
 
+
         isSelected = false;
+
+      
         yield return null;
     }
     void LockedCards()
