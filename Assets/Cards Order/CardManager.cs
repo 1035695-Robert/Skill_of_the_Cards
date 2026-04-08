@@ -30,7 +30,7 @@ public class CardManager : MonoBehaviour
             playingCards[randomizeArray] = card;
         }
         
-        DealCards dealCards = GetComponent<DealCards>();
+        MatchDealCards dealCards = GetComponent<MatchDealCards>();
         dealCards.StartDealHand(); 
     }
 }

@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
 
-public class DealCards : MonoBehaviour
+public class MatchDealCards : MonoBehaviour
 {
     public CardManager cardManager;
 
