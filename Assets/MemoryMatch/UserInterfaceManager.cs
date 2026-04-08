@@ -23,6 +23,13 @@ public class UserInterfaceManager : MonoBehaviour
             endConditionUI.SetActive(false);
         }
     }
+    private void OnDisable()
+    {
+        EventManager.failedMatch -= Lives;
+        EventManager.starCheck -= StarLevels;
+        EventManager.allCardsMatch -= EndCondtition;
+    }
+
     public void EndCondtition()
     {
         endConditionUI.SetActive(true);
