@@ -6,41 +6,42 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
 
-public class MatchDealCards : MonoBehaviour
+public class DealCardsOrder : MonoBehaviour
 {
-    public CardManager cardManager;
 
     [SerializeField] public List<GameObject> myHand;
     [SerializeField] private int myHandSize = 5;
-    public GameObject card;
-
 
     [SerializeField] private SplineContainer splineContainer;
     [SerializeField] private Transform spawnPoint;
 
-
-    public void StartDealHand()
+    public void OnEnable()
     {
-        StartCoroutine(DealCardToPlayer());
-        Debug.Log("DealCards to player");
+        EventManager.CardDealer += SetCards;
     }
-    IEnumerator DealCardToPlayer()
+    public void OnDisable()
     {
-        cardManager = GetComponent<CardManager>();
-      
-        {
-            for (int i = 0; i < myHandSize; i++)
-            {
+        EventManager.CardDealer -= SetCards;
+    }
 
-                GameObject cardInHand = Instantiate(cardManager.playingCards[i], spawnPoint.position, spawnPoint.rotation);
-                myHand.Add(cardInHand);
-                cardInHand.name = cardInHand.name.TrimEnd("(Clone)");
-                UpdateCardPosition();
-                yield return new WaitForSeconds(0.5f);
-            }
-            Timer timer = GameObject.Find("Timer").GetComponent<Timer>();
-            StartCoroutine(timer.StartTimer());
+    void SetCards(GameObject[] cardList)
+    {
+        StartCoroutine(DealCardToPlayer(cardList));
+    }
+    IEnumerator DealCardToPlayer(GameObject[] cardList)
+    {
+        Debug.Log("dealing cards");
+        for (int i = 0; i < myHandSize; i++)
+        {
+
+            GameObject cardInHand = Instantiate(cardList[i], spawnPoint.position, spawnPoint.rotation);
+            myHand.Add(cardInHand);
+            cardInHand.name = cardInHand.name.TrimEnd("(Clone)");
+            UpdateCardPosition();
+            yield return new WaitForSeconds(0.5f);
         }
+        EventManager.timer.Invoke();
+
 
     }
     void UpdateCardPosition()
@@ -63,6 +64,6 @@ public class MatchDealCards : MonoBehaviour
             myHand[i].transform.DOMove(splinePosition, 0.25f);
             myHand[i].transform.DOLocalRotateQuaternion(rotation, 0.25f);
         }
-       
+
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Splines;
 
-public class Card : MonoBehaviour
+public class CardMovement : MonoBehaviour
 {
     [Header("card Data")]
     [SerializeField] private string cardName;
@@ -13,7 +13,6 @@ public class Card : MonoBehaviour
     //public bool isFull = false;
     string cardLock;
 
-    CardManager cardManager;
     private void Start()
     {
         cardCollider = GetComponent<Collider2D>();

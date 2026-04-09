@@ -7,5 +7,5 @@ public interface Interfaces
 
 public interface ICardDropArea
 {
-    void OnCardDrop(Card card, string cardName, int cardNumber );
+    void OnCardDrop(CardMovement card, string cardName, int cardNumber );
 }

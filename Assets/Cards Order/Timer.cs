@@ -13,7 +13,19 @@ public class Timer : MonoBehaviour
     public string currentTime;
     public bool gameInPlay;
 
-   
+    private void OnEnable()
+    {
+        EventManager.timer += CallTimer;
+    }
+    private void OnDisable()
+    {
+        EventManager.timer -= CallTimer;
+    }
+
+    void CallTimer()
+    {
+        StartCoroutine(StartTimer());
+    }
     public IEnumerator StartTimer()
     {
         gameInPlay = true;
