@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UIElements;
 
 public class CardSelection : MonoBehaviour
 {
@@ -10,7 +11,12 @@ public class CardSelection : MonoBehaviour
     public int matchedCount;
     public int maxPairAmount = 9;
     public int maxTurns = 3;
+    public int turnsLeft;
 
+    private void Start()
+    {
+        turnsLeft = maxTurns;
+    }
 
     private void OnEnable()
     {
@@ -57,23 +63,25 @@ public class CardSelection : MonoBehaviour
 
             if (matchedCount == maxPairAmount)
             {
-                EventManager.allCardsMatch.Invoke();
+                EventManager.winCondition.Invoke();
                 Debug.Log("Congrats");
             }
 
         }
         else
         {
-            maxTurns--;
+            turnsLeft--;
+            EventManager.failedMatch.Invoke(turnsLeft);
 
-            if (maxTurns != 0)
-            {
-                EventManager.failedMatch.Invoke(maxTurns);
-            }
         }
-        EventManager.locked.Invoke();
+        if (turnsLeft == 0)
+        {
+            EventManager.winCondition.Invoke();
+        }
+        else
+            EventManager.locked.Invoke();
         typeList.Clear();
 
-       
+
     }
 }

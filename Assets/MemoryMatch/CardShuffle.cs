@@ -6,8 +6,16 @@ public class CardShuffle : MonoBehaviour
     public GameObject[] gameCards;
 
 
+    private void OnEnable()
+    {
+        EventManager.startingGame += Shuffle;
+    }
+    private void OnDisable()
+    {
+        EventManager.startingGame -= Shuffle;
+    }
 
-    public void Start()
+    public void Shuffle()
     {
         gameCards = Resources.LoadAll<GameObject>(gameFileName);
 

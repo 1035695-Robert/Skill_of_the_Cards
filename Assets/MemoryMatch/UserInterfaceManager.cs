@@ -17,12 +17,19 @@ public class UserInterfaceManager : MonoBehaviour
     {
         EventManager.failedMatch += Lives;
         EventManager.starCheck += StarLevels;
-        EventManager.allCardsMatch += EndCondtition;
+        EventManager.winCondition += EndCondtition;
         if (endConditionUI == true)
         {
             endConditionUI.SetActive(false);
         }
     }
+    private void OnDisable()
+    {
+        EventManager.failedMatch -= Lives;
+        EventManager.starCheck -= StarLevels;
+        EventManager.winCondition -= EndCondtition;
+    }
+
     public void EndCondtition()
     {
         endConditionUI.SetActive(true);
