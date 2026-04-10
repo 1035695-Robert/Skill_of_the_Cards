@@ -10,7 +10,7 @@ public class DealCardsMatch : MonoBehaviour
     public CardPlacementSlot[] cardSlots;
 
 
-    public float waitTime;
+    
 
     public void OnEnable()
     {
@@ -32,14 +32,9 @@ public class DealCardsMatch : MonoBehaviour
             //card.transform.Rotate(0, 180, 0);
         }
 
-        StartCoroutine(FlipDelay());
-
-    }
-    IEnumerator FlipDelay()
-    {
-        yield return new WaitForSeconds(waitTime);
         EventManager.startGame.Invoke();
     }
+   
 
 }
 

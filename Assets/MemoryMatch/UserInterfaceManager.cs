@@ -11,7 +11,8 @@ public class UserInterfaceManager : MonoBehaviour
     
     public int matchedCount;
     public TextMeshProUGUI Matched;
-
+    
+    
     public int MaxTurns = 3;
     private void OnEnable()
     {
@@ -46,6 +47,7 @@ public class UserInterfaceManager : MonoBehaviour
                 break;
             case 1:
                 Debug.Log("lives left:" + MaxTurns);
+                
                 break;
             case 2:
                 Debug.Log("lives left:" + MaxTurns);

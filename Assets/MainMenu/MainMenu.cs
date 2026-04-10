@@ -1,23 +1,34 @@
+using System.Net;
 using UnityEditor;
 using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    GameObject levelSelection;
+   public  GameObject levelSelection;
+   public GameObject UIcanvas;
     GameObject title;
+    static bool isReturn;
     private void Start()
     {
         levelSelection = GameObject.Find("LevelSelection");
-        levelSelection.SetActive(false);
-
         title = GameObject.Find("MainMenu");
-        title.SetActive(true);
-    }    
+        if (isReturn == true)
+        {
+            levelSelection.SetActive(true);
+            title.SetActive(false);
+        }
+        else
+        {
+            levelSelection.SetActive(false);
+            title.SetActive(true);
+        }
+    }
 
     public void Play()
     {
-        title.SetActive(!title.activeSelf);
-       levelSelection.SetActive(!levelSelection.activeSelf);
+       title.SetActive(!title.activeSelf);
+       levelSelection.gameObject.SetActive(!levelSelection.gameObject.activeSelf);
+        isReturn = !isReturn;
     }
 
     public void Quit()
