@@ -17,7 +17,7 @@ public class UserInterfaceManager : MonoBehaviour
     {
         EventManager.failedMatch += Lives;
         EventManager.starCheck += StarLevels;
-        EventManager.allCardsMatch += EndCondtition;
+        EventManager.winCondition += EndCondtition;
         if (endConditionUI == true)
         {
             endConditionUI.SetActive(false);
@@ -27,7 +27,7 @@ public class UserInterfaceManager : MonoBehaviour
     {
         EventManager.failedMatch -= Lives;
         EventManager.starCheck -= StarLevels;
-        EventManager.allCardsMatch -= EndCondtition;
+        EventManager.winCondition -= EndCondtition;
     }
 
     public void EndCondtition()

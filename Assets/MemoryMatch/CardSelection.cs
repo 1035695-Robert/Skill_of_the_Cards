@@ -63,7 +63,7 @@ public class CardSelection : MonoBehaviour
 
             if (matchedCount == maxPairAmount)
             {
-                EventManager.allCardsMatch.Invoke();
+                EventManager.winCondition.Invoke();
                 Debug.Log("Congrats");
             }
 
@@ -76,7 +76,7 @@ public class CardSelection : MonoBehaviour
         }
         if (turnsLeft == 0)
         {
-            EventManager.allCardsMatch.Invoke();
+            EventManager.winCondition.Invoke();
         }
         else
             EventManager.locked.Invoke();

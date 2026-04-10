@@ -1,18 +1,28 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class EventManager
 {
+    public delegate void StartingGame();
+    public static StartingGame startingGame;
 
     public delegate void DealingCards(GameObject[] CardList);
     public static DealingCards CardDealer;
 
     public delegate void WinCondition();
-    public static WinCondition allCardsMatch;
+    public static WinCondition winCondition;
+
+    //cards Order
+
+    public delegate void StartTimer();
+    public static StartTimer timer;
+
+    public delegate void LoseCondition();
+    public static LoseCondition loseCondition;
 
     //memory Match
-    public delegate void StartingGame();
-    public static StartingGame startingGame;
+
 
     public delegate void CardCheck(string type);
     public static CardCheck CardSelected;

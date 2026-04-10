@@ -145,12 +145,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1071494369770673158}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb978a26bf022f544ae63d6e71f0df5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 390fd047ad7d9f0428018f38d7da5fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: 
   cardNumber: 8
-  isFull: 0
 --- !u!50 &-347596100221155031
 Rigidbody2D:
   serializedVersion: 5
