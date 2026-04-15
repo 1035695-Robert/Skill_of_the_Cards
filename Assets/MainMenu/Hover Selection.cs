@@ -6,8 +6,14 @@ public class HoverSelection : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 {
     bool isHover = false;
      float hoverAmount = 0.5f;
+    Vector2 startPosition;
 
+    private void OnEnable()
+    {
+        isHover = false;
+    }
 
+  
     private void Start()
     {
     }

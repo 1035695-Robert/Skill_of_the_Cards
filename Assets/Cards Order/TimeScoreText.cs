@@ -38,6 +38,7 @@ public class TimeScoreText : MonoBehaviour
     //    GetScoreFileContent();
     //}
 
+   
     public void GetScoreFileContent()
     {
         if (!string.IsNullOrEmpty(fileName))
@@ -69,12 +70,12 @@ public class TimeScoreText : MonoBehaviour
         if (currentPlayTime < bestTimeFloat)
         {
             Debug.Log("new Best time");
-            currentTimeData = new TimeScore(currentPlayTime.ToString());
+            currentTimeData = new TimeScore(currentPlayTime.ToString("F2"));
             WriteData(currentTimeData.ReturnTimeSaveData());
-            bestTimeText.text = "New Record \n" + currentPlayTime + " Seconds";
+            bestTimeText.text = "New Record \n" + currentPlayTime.ToString("F2") + " Seconds";
         }
         else
-            bestTimeText.text = textFileContents + " Seconds";
+            bestTimeText.text = textFileContents + "    ";
     }
     void WriteData(string dataToWrite)
     {

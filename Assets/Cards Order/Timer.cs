@@ -13,7 +13,19 @@ public class Timer : MonoBehaviour
     public string currentTime;
     public bool gameInPlay;
 
-   
+    private void OnEnable()
+    {
+        EventManager.timer += CallTimer;
+    }
+    private void OnDisable()
+    {
+        EventManager.timer -= CallTimer;
+    }
+
+    void CallTimer()
+    {
+        StartCoroutine(StartTimer());
+    }
     public IEnumerator StartTimer()
     {
         gameInPlay = true;
@@ -22,10 +34,10 @@ public class Timer : MonoBehaviour
         {
             countUp += Time.deltaTime;
             // double b = Math.Round(countUp, 2);
-
+            Second = countUp;
            
-            Second = Mathf.FloorToInt(countUp % 60);
-            currentTime =  Second.ToString() + " Seconds";
+            //Second = Mathf.FloorToInt(countUp);
+            currentTime = "Seconds: " + Second.ToString("F2") ;
             currentTimeText.text = currentTime;
             yield return null;
         }
