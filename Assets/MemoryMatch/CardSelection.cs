@@ -20,11 +20,11 @@ public class CardSelection : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.CardSelected += CardCountCheck;
+        EventManager.ChosenCards += CardCountCheck;
     }
     private void OnDisable()
     {
-        EventManager.CardSelected -= CardCountCheck;
+        EventManager.ChosenCards -= CardCountCheck;
     }
 
     public void CardCountCheck(string cardType)
@@ -50,7 +50,7 @@ public class CardSelection : MonoBehaviour
     }
     IEnumerator MatchCheck()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         string[] typeListArray = typeList.ToArray();
 
         if (typeListArray[0] == typeListArray[1])
@@ -65,21 +65,21 @@ public class CardSelection : MonoBehaviour
             {
                 EventManager.winCondition.Invoke();
                 Debug.Log("Congrats");
+                yield break;
             }
-
+            EventManager.unlock.Invoke();
         }
         else
         {
             turnsLeft--;
             EventManager.failedMatch.Invoke(turnsLeft);
-
         }
         if (turnsLeft == 0)
         {
             EventManager.winCondition.Invoke();
+            yield break;
         }
-        else
-            EventManager.locked.Invoke();
+
         typeList.Clear();
 
 

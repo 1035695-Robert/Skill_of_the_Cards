@@ -26,7 +26,10 @@ public class CardMatch : MonoBehaviour
     public float turnDuration = 2.0f;
     public bool isSelected;
     public bool isLocked;
-    public int turnsLeft = 3;
+    bool isUnlocked;
+    float holdTime = 1f;
+    
+   
 
 
     public void OnEnable()
@@ -34,14 +37,18 @@ public class CardMatch : MonoBehaviour
         isSelected = true;
         EventManager.startGame += ResetCards;
         EventManager.failedMatch += ResetCards;
-        EventManager.locked += LockedCards;
+        EventManager.locked += LockCards;
+        EventManager.unlock += UnlockCards;
+        EventManager.displayCards += ShowCards;
     }
 
     private void OnDisable()
     {
         EventManager.startGame -= ResetCards;
         EventManager.failedMatch -= ResetCards;
-        EventManager.locked -= LockedCards;
+        EventManager.locked -= LockCards;
+       
+
     }
     private void OnMouseDown()
     {
@@ -51,12 +58,36 @@ public class CardMatch : MonoBehaviour
             StartCoroutine(TurnCardOver());
     }
 
+    public void ShowCards()
+    {
+        StartCoroutine(DisplayCards());
+    }
+    IEnumerator DisplayCards()
+    {
+        float turnTime = 0;
+        string cardTypeString = CardType.ToString();
+        Debug.Log("Card type" + cardTypeString);
+
+        Quaternion startRotation = transform.rotation;
+        Quaternion endRotation = Quaternion.Euler(0, 0, 0);
+        
+        while (turnTime < turnDuration)
+        {
+            transform.rotation = Quaternion.Slerp(startRotation, endRotation, turnTime);
+
+            turnTime += Time.deltaTime;
+
+            yield return null;
+        }
+        EventManager.displayCards -= ShowCards;
+    }
+
     IEnumerator TurnCardOver()
     {
         float turnTime = 0;
         string cardTypeString = CardType.ToString();
         Debug.Log("Card type" + cardTypeString);
-        EventManager.CardSelected.Invoke(cardTypeString);
+        EventManager.ChosenCards.Invoke(cardTypeString);
         EventManager.SelectedCard += MatchedCards;
 
         Quaternion startRotation = transform.rotation;
@@ -71,7 +102,7 @@ public class CardMatch : MonoBehaviour
         }
 
 
-        yield return null;
+        yield break;
     }
     public void ResetCards()
     {
@@ -79,40 +110,48 @@ public class CardMatch : MonoBehaviour
     }
     public void ResetCards(int maxTurns)
     {
-        turnsLeft--;
+        
         StartCoroutine(ResetAllCards());
     }
 
     IEnumerator ResetAllCards()
     {
-        float turnTime = 0;
+        yield return new WaitForSeconds(holdTime);
 
+        float turnTime = 0;
+        
         Quaternion startRotation = transform.rotation;
         Quaternion endRotation = Quaternion.Euler(0, 180, 0);
-
+        
+        EventManager.unlock.Invoke();
+        
         while (turnTime < turnDuration && isSelected)
-        {
+        { 
             transform.rotation = Quaternion.Slerp(startRotation, endRotation, turnTime);
-
+            
             turnTime += Time.deltaTime;
             yield return null;
         }
+        isUnlocked = false;
         EventManager.SelectedCard -= MatchedCards;
-
-
         isSelected = false;
-
-      
-        yield return null;
+        yield break;
     }
-    void LockedCards()
+    void LockCards()
     {
-        isLocked = !isLocked;
+        isLocked = true;
+
+    }
+    void UnlockCards()
+    { 
+        isLocked = false;
+        isUnlocked = true;
     }
 
     void MatchedCards()
     {
         EventManager.failedMatch -= ResetCards;
-        //card will no longer Flip since already paired
+        EventManager.unlock -= UnlockCards;
+        
     }
 }

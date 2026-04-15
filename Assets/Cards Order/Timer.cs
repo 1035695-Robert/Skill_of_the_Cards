@@ -34,10 +34,10 @@ public class Timer : MonoBehaviour
         {
             countUp += Time.deltaTime;
             // double b = Math.Round(countUp, 2);
-
+            Second = countUp;
            
-            Second = Mathf.FloorToInt(countUp % 60);
-            currentTime =  Second.ToString() + " Seconds";
+            //Second = Mathf.FloorToInt(countUp);
+            currentTime = "Seconds: " + Second.ToString("F2") ;
             currentTimeText.text = currentTime;
             yield return null;
         }

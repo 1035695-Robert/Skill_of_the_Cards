@@ -7,19 +7,33 @@ public class CardMovement : MonoBehaviour
     [SerializeField] private string cardName;
     [SerializeField] private int cardNumber;
 
+    bool isPlay;
 
     private Collider2D cardCollider;
     private Vector3 startDragPosition;
     //public bool isFull = false;
-    string cardLock;
 
+
+    private void OnEnable()
+    {
+        EventManager.timer += Play;
+    }
+    private void OnDisable()
+    {
+        EventManager.timer -= Play;
+    }
     private void Start()
     {
         cardCollider = GetComponent<Collider2D>();
     }
+
+    void Play()
+    {
+        isPlay = true;
+    }
     private void OnMouseDown()
     {
-        if (cardCollider != null)
+        if (cardCollider != null && isPlay == true)
         {
             startDragPosition = transform.position;
             transform.position = GetMousePositionInWorldSpace();
@@ -27,7 +41,7 @@ public class CardMovement : MonoBehaviour
     }
     private void OnMouseDrag()
     {
-        if (cardCollider != null)
+        if (cardCollider != null && isPlay == true)
         {
             transform.position = GetMousePositionInWorldSpace();
         }
@@ -35,7 +49,7 @@ public class CardMovement : MonoBehaviour
     private void OnMouseUp()
     {
 
-        if (cardCollider != null)
+        if (cardCollider != null && isPlay == true)
         {
             cardCollider.enabled = false;
             Collider2D hitCollider = Physics2D.OverlapPoint(transform.position);
