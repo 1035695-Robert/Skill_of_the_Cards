@@ -23,7 +23,6 @@ public class EventManager
 
     //memory Match
 
-
     public delegate void CardCheck(string type);
     public static CardCheck ChosenCards;
 
@@ -44,4 +43,7 @@ public class EventManager
 
     public delegate void UnlockCards();
     public static UnlockCards unlock;
+
+    public delegate void DisplayCards();
+    public static DisplayCards displayCards;
 }

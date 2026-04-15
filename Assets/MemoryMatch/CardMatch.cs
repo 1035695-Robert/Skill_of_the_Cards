@@ -39,6 +39,7 @@ public class CardMatch : MonoBehaviour
         EventManager.failedMatch += ResetCards;
         EventManager.locked += LockCards;
         EventManager.unlock += UnlockCards;
+        EventManager.displayCards += ShowCards;
     }
 
     private void OnDisable()
@@ -46,6 +47,8 @@ public class CardMatch : MonoBehaviour
         EventManager.startGame -= ResetCards;
         EventManager.failedMatch -= ResetCards;
         EventManager.locked -= LockCards;
+       
+
     }
     private void OnMouseDown()
     {
@@ -53,6 +56,30 @@ public class CardMatch : MonoBehaviour
         Debug.Log(CardType);
         if (!isSelected && !isLocked)
             StartCoroutine(TurnCardOver());
+    }
+
+    public void ShowCards()
+    {
+        StartCoroutine(DisplayCards());
+    }
+    IEnumerator DisplayCards()
+    {
+        float turnTime = 0;
+        string cardTypeString = CardType.ToString();
+        Debug.Log("Card type" + cardTypeString);
+
+        Quaternion startRotation = transform.rotation;
+        Quaternion endRotation = Quaternion.Euler(0, 0, 0);
+        
+        while (turnTime < turnDuration)
+        {
+            transform.rotation = Quaternion.Slerp(startRotation, endRotation, turnTime);
+
+            turnTime += Time.deltaTime;
+
+            yield return null;
+        }
+        EventManager.displayCards -= ShowCards;
     }
 
     IEnumerator TurnCardOver()
