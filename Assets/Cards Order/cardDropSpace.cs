@@ -8,7 +8,7 @@ public class cardDropSpace : MonoBehaviour, ICardDropArea
     public CardPlacementList placementList = new CardPlacementList();
     public CardPlacementSlot[] cardSlots;
 
-   
+  
 
     public void OnCardDrop(CardMovement card, string name, int number)
     {
@@ -16,7 +16,7 @@ public class cardDropSpace : MonoBehaviour, ICardDropArea
         {
             if (cardSlots[i].isFull == false)
             {
-               
+                EventManager.dropAudio.Invoke();
                 card.transform.SetParent(cardSlots[i].transform);
                 card.transform.position = cardSlots[i].transform.position;
                 card.transform.rotation = cardSlots[i].transform.rotation;

@@ -28,8 +28,9 @@ public class CardMatch : MonoBehaviour
     public bool isLocked;
     bool isUnlocked;
     float holdTime = 1f;
-    
-   
+
+    [SerializeField] public AudioClip[] flipCardClip;
+    private AudioSource audioSource;
 
 
     public void OnEnable()
@@ -40,6 +41,13 @@ public class CardMatch : MonoBehaviour
         EventManager.locked += LockCards;
         EventManager.unlock += UnlockCards;
         EventManager.displayCards += ShowCards;
+
+        if (audioSource == null)
+        {
+            GameObject audioSourceObject = GameObject.Find("Audio Source");
+            audioSource = audioSourceObject.GetComponent<AudioSource>();
+
+        }
     }
 
     private void OnDisable()
@@ -47,29 +55,29 @@ public class CardMatch : MonoBehaviour
         EventManager.startGame -= ResetCards;
         EventManager.failedMatch -= ResetCards;
         EventManager.locked -= LockCards;
-       
+        EventManager.displayCards -= ShowCards;
+
 
     }
     private void OnMouseDown()
     {
-
-        Debug.Log(CardType);
         if (!isSelected && !isLocked)
             StartCoroutine(TurnCardOver());
     }
 
-    public void ShowCards()
+    public void ShowCards(int degrees)
     {
-        StartCoroutine(DisplayCards());
+        StartCoroutine(DisplayCards(degrees));
     }
-    IEnumerator DisplayCards()
+    IEnumerator DisplayCards(int degrees)
     {
         float turnTime = 0;
         string cardTypeString = CardType.ToString();
         Debug.Log("Card type" + cardTypeString);
 
         Quaternion startRotation = transform.rotation;
-        Quaternion endRotation = Quaternion.Euler(0, 0, 0);
+        Quaternion endRotation = Quaternion.Euler(0, degrees, 0);
+
         
         while (turnTime < turnDuration)
         {
@@ -79,7 +87,10 @@ public class CardMatch : MonoBehaviour
 
             yield return null;
         }
-        EventManager.displayCards -= ShowCards;
+        if (degrees == 180)
+        {
+            isSelected = false;
+        }
     }
 
     IEnumerator TurnCardOver()
@@ -93,6 +104,7 @@ public class CardMatch : MonoBehaviour
         Quaternion startRotation = transform.rotation;
         Quaternion endRotation = Quaternion.Euler(0, 0, 0);
         isSelected = true;
+        EventManager.slideAudio.Invoke();
         while (turnTime < turnDuration)
         {
             transform.rotation = Quaternion.Slerp(startRotation, endRotation, turnTime);
@@ -110,7 +122,7 @@ public class CardMatch : MonoBehaviour
     }
     public void ResetCards(int maxTurns)
     {
-        
+
         StartCoroutine(ResetAllCards());
     }
 
@@ -119,16 +131,18 @@ public class CardMatch : MonoBehaviour
         yield return new WaitForSeconds(holdTime);
 
         float turnTime = 0;
-        
+
         Quaternion startRotation = transform.rotation;
         Quaternion endRotation = Quaternion.Euler(0, 180, 0);
-        
+
         EventManager.unlock.Invoke();
-        
+
+ 
+
         while (turnTime < turnDuration && isSelected)
-        { 
+        {
             transform.rotation = Quaternion.Slerp(startRotation, endRotation, turnTime);
-            
+
             turnTime += Time.deltaTime;
             yield return null;
         }
@@ -143,7 +157,7 @@ public class CardMatch : MonoBehaviour
 
     }
     void UnlockCards()
-    { 
+    {
         isLocked = false;
         isUnlocked = true;
     }
@@ -152,6 +166,6 @@ public class CardMatch : MonoBehaviour
     {
         EventManager.failedMatch -= ResetCards;
         EventManager.unlock -= UnlockCards;
-        
     }
+
 }

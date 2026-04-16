@@ -11,8 +11,9 @@ public class DealCardsMatch : MonoBehaviour
     public CardPlacementSlot[] cardSlots;
     public Transform spawnPosition;
 
-    
+    public float waitTime = 3;
 
+    private AudioSource audioSource;
     public void OnEnable()
     {
         EventManager.CardDealer += DealCards;
@@ -37,16 +38,19 @@ public class DealCardsMatch : MonoBehaviour
             Debug.Log(card.name);
             card.transform.SetParent(cardSlots[i].transform);
             card.transform.DOMove(cardSlots[i].transform.position, 0.1f);
-            
-            
 
+            //playSound FX
+            EventManager.dropAudio.Invoke();
+             
             yield return new WaitForSeconds(0.1f);
 
             //card.transform.Rotate(0, 180, 0);
         }
-        EventManager.displayCards.Invoke();
-        yield return new WaitForSeconds(2f);
-        EventManager.startGame.Invoke();
+        EventManager.displayCards.Invoke(0);
+        EventManager.slideAudio.Invoke();
+        yield return new WaitForSeconds(waitTime);
+        EventManager.displayCards.Invoke(180);
+        EventManager.slideAudio.Invoke();
     }
 
 }
