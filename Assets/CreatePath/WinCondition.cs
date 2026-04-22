@@ -1,15 +1,15 @@
 using UnityEngine;
 
-//public class WinCondition : MonoBehaviour
-//{
-//    public bool hasSolved = false;
+public class WinCondition : MonoBehaviour
+{
+    public bool hasSolved = false;
 
-//    public void OnCollisionEnter(Collision collision)
-//    {
-//        if (Collision.gameObject.CompareTag("DropArea"))
-//        {
-//            Debug.Log("Player won");
-//            hasSolved = true;
-//        }
-//    }
-//}
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Player won");
+            hasSolved = true;
+        }
+    }
+}
