@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-   public  GameObject levelSelection;
+     GameObject levelSelection;
    public GameObject UIcanvas;
     GameObject title;
+    public GameObject credits;
     static bool isReturn;
     private void Start()
     {
@@ -16,11 +17,13 @@ public class MainMenu : MonoBehaviour
         {
             levelSelection.SetActive(true);
             title.SetActive(false);
+           credits.SetActive(false);
         }
         else
         {
             levelSelection.SetActive(false);
             title.SetActive(true);
+            credits.SetActive(false);
         }
     }
 
@@ -31,6 +34,12 @@ public class MainMenu : MonoBehaviour
         isReturn = !isReturn;
     }
 
+public void Credits()
+    {
+        title.SetActive(!title.activeSelf);
+        credits.SetActive(!credits.activeSelf);
+       
+    }
     public void Quit()
     {
         Debug.LogError("Quit Game");

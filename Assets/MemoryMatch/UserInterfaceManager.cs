@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using NUnit.Framework.Constraints;
 using TMPro;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class UserInterfaceManager : MonoBehaviour
     
     public int matchedCount;
     public TextMeshProUGUI Matched;
-    
+    public GameObject[] failed;
     
     public int MaxTurns = 3;
     private void OnEnable()
@@ -23,6 +24,7 @@ public class UserInterfaceManager : MonoBehaviour
         {
             endConditionUI.SetActive(false);
         }
+
     }
     private void OnDisable()
     {
@@ -33,7 +35,9 @@ public class UserInterfaceManager : MonoBehaviour
 
     public void EndCondtition()
     {
+        Lives(MaxTurns);
         endConditionUI.SetActive(true);
+       
         Matched.text = "Matched: " + matchedCount.ToString();
         cardSlotUI.SetActive(false);
     }
@@ -43,16 +47,27 @@ public class UserInterfaceManager : MonoBehaviour
         switch (maxTurns)
         {
             case 0:
-                //EndCondtition();
+                failed[0].SetActive(true);
+                failed[1].SetActive(true);
+                failed[2].SetActive(true);
                 break;
             case 1:
+                failed[0].SetActive(true);
+                failed[1].SetActive(true);
+                failed[2].SetActive(false);
                 Debug.Log("lives left:" + MaxTurns);
                 
                 break;
             case 2:
+                failed[0].SetActive(true);
+                failed[1].SetActive(false);
+                failed[2].SetActive(false);
                 Debug.Log("lives left:" + MaxTurns);
                 break;
             case 3:
+                failed[0].SetActive(false);
+                failed[1].SetActive(false);
+                failed[2].SetActive(false);
                 Debug.Log("lives left:" + MaxTurns); //Default
                 break;
 
