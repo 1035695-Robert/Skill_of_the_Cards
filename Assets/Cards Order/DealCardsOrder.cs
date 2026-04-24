@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Splines;
 
 public class DealCardsOrder : MonoBehaviour
@@ -15,9 +16,15 @@ public class DealCardsOrder : MonoBehaviour
     [SerializeField] private SplineContainer splineContainer;
     [SerializeField] private Transform spawnPoint;
 
+    [SerializeField] private AudioClip[] dealCardsSoundClip;
+    private GameObject audioSourceObject;
+    private AudioSource audioSource;
+
     public void OnEnable()
-    {
+    {     
         EventManager.CardDealer += SetCards;
+        audioSourceObject = GameObject.Find("Audio Source");
+        audioSource = audioSourceObject.GetComponent<AudioSource>();
     }
     public void OnDisable()
     {
@@ -63,6 +70,8 @@ public class DealCardsOrder : MonoBehaviour
             Quaternion rotation = Quaternion.LookRotation(up, Vector3.Cross(up, forward).normalized);
             myHand[i].transform.DOMove(splinePosition, 0.25f);
             myHand[i].transform.DOLocalRotateQuaternion(rotation, 0.25f);
+            //playSound FX
+            EventManager.slideAudio.Invoke();
         }
 
     }

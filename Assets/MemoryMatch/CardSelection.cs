@@ -72,16 +72,18 @@ public class CardSelection : MonoBehaviour
         else
         {
             turnsLeft--;
+           
             EventManager.failedMatch.Invoke(turnsLeft);
+            yield return new WaitForSeconds(1f);
+            EventManager.slideAudio.Invoke();
         }
         if (turnsLeft == 0)
         {
             EventManager.winCondition.Invoke();
             yield break;
         }
-
+     
         typeList.Clear();
-
-
+      
     }
 }

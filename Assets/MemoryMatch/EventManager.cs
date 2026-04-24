@@ -44,6 +44,14 @@ public class EventManager
     public delegate void UnlockCards();
     public static UnlockCards unlock;
 
-    public delegate void DisplayCards();
+    public delegate void DisplayCards(int value);
     public static DisplayCards displayCards;
+
+
+    public delegate void FlipCardAudio();
+    public static FlipCardAudio slideAudio;
+
+    public delegate void DropCardAudio();
+    public static DropCardAudio dropAudio;
+
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CardShuffle : MonoBehaviour
@@ -5,6 +6,9 @@ public class CardShuffle : MonoBehaviour
     public string gameFileName;
     public GameObject[] gameCards;
 
+    public AudioClip[] shufflesounds;
+    private GameObject audioSourceObject;
+    private AudioSource audioSource;
 
     private void OnEnable()
     {
@@ -13,6 +17,12 @@ public class CardShuffle : MonoBehaviour
     private void OnDisable()
     {
         EventManager.startingGame -= Shuffle;
+    }
+    private void Start()
+    {
+        audioSourceObject = GameObject.Find("Audio Source");
+        audioSource = audioSourceObject.GetComponent<AudioSource>();
+        shufflesounds = Resources.LoadAll<AudioClip>("Audio/SilverDubloon/shuffle");
     }
 
     public void Shuffle()
@@ -26,7 +36,15 @@ public class CardShuffle : MonoBehaviour
             gameCards[PositionInIndex] = gameCards[randomizeArray];
             gameCards[randomizeArray] = card;
         }
+        StartCoroutine(PlayAudio());
+    }
 
+    IEnumerator PlayAudio()
+    {
+        int index = Random.Range(0, shufflesounds.Length);
+        audioSource.clip = shufflesounds[index];
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
         EventManager.CardDealer?.Invoke(gameCards);
     }
 }
