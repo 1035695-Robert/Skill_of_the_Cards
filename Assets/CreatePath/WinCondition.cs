@@ -1,15 +1,24 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-//public class WinCondition : MonoBehaviour
-//{
-//    public bool hasSolved = false;
+public class WinCondition : MonoBehaviour
+{
+    public bool hasSolved = false;
 
-//    public void OnCollisionEnter(Collision collision)
-//    {
-//        if (Collision.gameObject.CompareTag("DropArea"))
-//        {
-//            Debug.Log("Player won");
-//            hasSolved = true;
-//        }
-//    }
-//}
+    private void Start()
+    {
+        GetComponent<Renderer>().material.color = Color.green;
+    }
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        
+        Debug.Log("Something entered the trigger: " + other.name); 
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Player won");
+            hasSolved = true;
+
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
+}
