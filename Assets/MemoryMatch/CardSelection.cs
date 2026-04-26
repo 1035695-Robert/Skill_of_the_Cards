@@ -55,7 +55,7 @@ public class CardSelection : MonoBehaviour
 
         if (typeListArray[0] == typeListArray[1])
         {
-            Debug.Log("Match");
+            Debug.Log("Match"); 
             matchedCount++;
             EventManager.SelectedCard.Invoke();
 

@@ -33,7 +33,6 @@ public class DealCardsMatch : MonoBehaviour
     {
         StartCoroutine(DealingCards(cardList));
     }
-
     IEnumerator DealingCards(GameObject[] cardList)
     {
         yield return new WaitForSeconds(0.1f);
