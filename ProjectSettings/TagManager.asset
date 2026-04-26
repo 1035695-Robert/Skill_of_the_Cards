@@ -5,8 +5,10 @@ TagManager:
   serializedVersion: 3
   tags:
   - Cards
-  - StraightTile
-  - RightAngleTile
+  - UpTile
+  - DownTile
+  - RightTile
+  - LeftTile
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - CreatePathGrid
   - new UI
   - 
-  - 
+  - ArrowPlayerCollision
   - 
   - 
   - 

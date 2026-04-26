@@ -4,7 +4,7 @@ public class LoseCondition : MonoBehaviour
 {
     public bool hasLost = false;
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
