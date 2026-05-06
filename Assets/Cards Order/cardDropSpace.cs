@@ -44,7 +44,7 @@ public class cardDropSpace : MonoBehaviour, ICardDropArea
                 {
                     
                     Debug.Log("<color=yellow> winner </color>" + (i + 2) + "/" + placementList.cardNumber.Count);
-                    EventManager.winCondition();
+                    EventManager.winCondtion();
                 }
 
                 yield return null;

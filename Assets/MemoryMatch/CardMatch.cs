@@ -37,7 +37,7 @@ public class CardMatch : MonoBehaviour
     {
         isSelected = true;
         EventManager.startGame += ResetCards;
-        EventManager.failedMatch += ResetCards;
+        EventManager.failed += ResetCards;
         EventManager.locked += LockCards;
         EventManager.unlock += UnlockCards;
         EventManager.displayCards += ShowCards;
@@ -53,7 +53,7 @@ public class CardMatch : MonoBehaviour
     private void OnDisable()
     {
         EventManager.startGame -= ResetCards;
-        EventManager.failedMatch -= ResetCards;
+        EventManager.failed -= ResetCards;
         EventManager.locked -= LockCards;
         EventManager.displayCards -= ShowCards;
 
@@ -164,7 +164,7 @@ public class CardMatch : MonoBehaviour
 
     void MatchedCards()
     {
-        EventManager.failedMatch -= ResetCards;
+        EventManager.failed -= ResetCards;
         EventManager.unlock -= UnlockCards;
     }
 

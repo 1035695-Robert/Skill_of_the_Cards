@@ -15,12 +15,12 @@ public class WinLose : MonoBehaviour
 
     public void OnEnable()
     {
-        EventManager.winCondition += Win;
+        EventManager.winCondtion += Win;
         EventManager.loseCondition += Lose;
     }
     public void OnDisable()
     {
-        EventManager.winCondition -= Win;
+        EventManager.winCondtion -= Win;
         EventManager.loseCondition -= Lose;
     }
     public void Win()

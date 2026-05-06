@@ -8,18 +8,21 @@ public class UserInterfaceManager : MonoBehaviour
     public GameObject endConditionUI;
     public GameObject cardSlotUI;
     public GameObject[] star;
+
     
     
-    public int matchedCount;
-    public TextMeshProUGUI Matched;
+    public int totalCount = 0;
+    public int starCount;
+    public TextMeshProUGUI displayText;
     public GameObject[] failed;
     
     public int MaxTurns = 3;
     private void OnEnable()
     {
-        EventManager.failedMatch += Lives;
+        EventManager.failed += Lives;
         EventManager.starCheck += StarLevels;
-        EventManager.winCondition += EndCondtition;
+        EventManager.endCondtion += EndCondtition;
+       
         if (endConditionUI == true)
         {
             endConditionUI.SetActive(false);
@@ -28,17 +31,17 @@ public class UserInterfaceManager : MonoBehaviour
     }
     private void OnDisable()
     {
-        EventManager.failedMatch -= Lives;
+        EventManager.failed -= Lives;
         EventManager.starCheck -= StarLevels;
-        EventManager.winCondition -= EndCondtition;
+        EventManager.endCondtion -= EndCondtition;
     }
 
-    public void EndCondtition()
+    public void EndCondtition(string gameInfo, int maxCount)
     {
-        Lives(MaxTurns);
+       // Lives(MaxTurns);
         endConditionUI.SetActive(true);
        
-        Matched.text = "Matched: " + matchedCount.ToString();
+        displayText.text = gameInfo + ": " + totalCount.ToString() + "/" + maxCount.ToString();
         cardSlotUI.SetActive(false);
     }
 
@@ -70,38 +73,36 @@ public class UserInterfaceManager : MonoBehaviour
                 failed[2].SetActive(false);
                 Debug.Log("lives left:" + MaxTurns); //Default
                 break;
-
-
-
         }
     }
 
 
-    public void StarLevels(int count)
+    public void StarLevels(int count, int maxAmount)
     {
-        matchedCount = count;
-
-        switch (matchedCount)
+        totalCount = count;
+        starCount = count / (maxAmount/3);
+        Debug.Log(starCount);
+        switch (starCount)
         {
-            case < 3: // less than 3
+            case 0: // less than 3
                 star[0].SetActive(false);
                 star[1].SetActive(false);
                 star[2].SetActive(false);
                 break;
 
-            case >= 3 and < 6:
+            case 1:
                 star[0].SetActive(true);
                 star[1].SetActive(false);
                 star[2].SetActive(false);
                 break;
 
-            case >= 6 and < 9:
+            case 2:
                 star[0].SetActive(true);
                 star[1].SetActive(true);
                 star[2].SetActive(false);
                 break;
 
-            case 9:
+            case 3:
                 star[0].SetActive(true);
                 star[1].SetActive(true);
                 star[2].SetActive(true);

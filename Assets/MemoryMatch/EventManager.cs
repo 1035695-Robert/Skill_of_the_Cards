@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,7 +12,10 @@ public class EventManager
     public static DealingCards CardDealer;
 
     public delegate void WinCondition();
-    public static WinCondition winCondition;
+    public static WinCondition winCondtion;
+
+    public delegate void EndCondtion(string gameInfo, int maxCount);
+    public static EndCondtion endCondtion;
 
     //cards Order
 
@@ -30,7 +34,7 @@ public class EventManager
     public static MatchedCards SelectedCard;
 
     public delegate void FailedMatch(int maxTurns);
-    public static FailedMatch failedMatch;
+    public static FailedMatch failed;
 
     public delegate void LockCards();
     public static LockCards locked;
@@ -38,7 +42,7 @@ public class EventManager
     public delegate void StartGame();
     public static StartGame startGame;
 
-    public delegate void StarCheck(int matchCount);
+    public delegate void StarCheck(int count, int maxCount);
     public static StarCheck starCheck;
 
     public delegate void UnlockCards();
@@ -54,4 +58,8 @@ public class EventManager
     public delegate void DropCardAudio();
     public static DropCardAudio dropAudio;
 
+
+    //higher lower
+    public delegate void DrawCard(string Selection);
+    public static DrawCard drawCard;
 }

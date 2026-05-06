@@ -59,11 +59,11 @@ public class CardSelection : MonoBehaviour
             matchedCount++;
             EventManager.SelectedCard.Invoke();
 
-            EventManager.starCheck.Invoke(matchedCount);
+            EventManager.starCheck.Invoke(matchedCount, maxPairAmount);
 
             if (matchedCount == maxPairAmount)
             {
-                EventManager.winCondition.Invoke();
+                EventManager.winCondtion.Invoke();
                 Debug.Log("Congrats");
                 yield break;
             }
@@ -73,13 +73,13 @@ public class CardSelection : MonoBehaviour
         {
             turnsLeft--;
            
-            EventManager.failedMatch.Invoke(turnsLeft);
+            EventManager.failed.Invoke(turnsLeft);
             yield return new WaitForSeconds(1f);
             EventManager.slideAudio.Invoke();
         }
         if (turnsLeft == 0)
         {
-            EventManager.winCondition.Invoke();
+            EventManager.endCondtion.Invoke("Matched", maxPairAmount);
             yield break;
         }
      
