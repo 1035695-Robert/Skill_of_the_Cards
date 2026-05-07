@@ -31,17 +31,16 @@ public class DrawCard : MonoBehaviour
     void DrawingCard(string selection)
     {
 
-        if (cardId >= dealCards.orderOfCards.Count) //add failattempts
-        {
-            GameOver();
-            return;
-        }
+        
 
         dealCards.orderOfCards[cardId].transform.DORotateQuaternion(Quaternion.Euler(0, 0, 0), 0.5f);
         dealCards.orderOfCards[cardId].transform.DOMove(slot[0].transform.position, 0.1f);
+        //playSound FX
+        EventManager.dropAudio.Invoke();
         if (cardId > 0)
         {
             dealCards.orderOfCards[cardId - 1].transform.DOMove(slot[1].transform.position, 0.1f);
+            EventManager.slideAudio.Invoke();
             if (cardId >= 2)
                 dealCards.orderOfCards[cardId - 2].SetActive(false);
             CheckSelection(selection, cardId);
@@ -51,8 +50,12 @@ public class DrawCard : MonoBehaviour
         {
             dealCards.orderOfCards[cardId + 2].SetActive(true);
         }
-
         cardId++;
+        if (cardId >= dealCards.orderOfCards.Count) //add failattempts
+        {
+            GameOver();
+            return;
+        }
 
     }
     void CheckSelection(string selection, int i)

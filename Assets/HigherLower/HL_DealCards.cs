@@ -24,7 +24,7 @@ public class HL_DealCards : MonoBehaviour
 
     IEnumerator DealingCards(GameObject[] cards)
     {
-
+        
         for(int i = 0; i < cards.Length; i++)
         {
             GameObject card = Instantiate(cards[i], spawnPosition.transform.position, Quaternion.Euler(0,180,0));
@@ -35,6 +35,8 @@ public class HL_DealCards : MonoBehaviour
                 card.SetActive(false);
             }
         }
+
+        EventManager.locked.Invoke();
         EventManager.drawCard.Invoke("default");
 
 

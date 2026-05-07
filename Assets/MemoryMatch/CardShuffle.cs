@@ -21,7 +21,7 @@ public class CardShuffle : MonoBehaviour
     private void Start()
     {
         audioSourceObject = GameObject.Find("Audio Source");
-        //audioSource = audioSourceObject.GetComponent<AudioSource>();
+        audioSource = audioSourceObject.GetComponent<AudioSource>();
         shufflesounds = Resources.LoadAll<AudioClip>("Audio/SilverDubloon/shuffle");
     //Shuffle();
     }
@@ -42,10 +42,10 @@ public class CardShuffle : MonoBehaviour
 
     IEnumerator PlayAudio()
     {
-        //int index = Random.Range(0, shufflesounds.Length);
-        //audioSource.clip = shufflesounds[index];
-        //audioSource.Play();
-        //yield return new WaitForSeconds(audioSource.clip.length);
+        int index = Random.Range(0, shufflesounds.Length);
+        audioSource.clip = shufflesounds[index];
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
         yield return null;
         EventManager.CardDealer?.Invoke(gameCards);
     }
